@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0 → HERO: The Journey of Growth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #131317;
+            --card-bg: #1b1b1f;
+            --card-alt: #1f1f23;
+            --text-primary: #fff4e6;
+            --text-secondary: #d0c5b7;
+            --text-muted: #998f83;
+            --accent-gold: #fbb97c;
+            --accent-light: #f3d5a3;
+            --accent-pale: #ffdcc0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: 72px; line-height: 1.2; }
+        h2 { font-size: 48px; line-height: 1.2; }
+        h3 { font-size: 22px; font-weight: 600; }
+
+        .eyebrow {
+            font-family: 'Syne', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.2px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 40px; }
+            h1 { font-size: 48px; }
+            h2 { font-size: 32px; }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(19, 19, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(251, 185, 124, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            padding: 12px 80px;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        header nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        header nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 160px;
+            padding-bottom: 80px;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 96px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 850px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(105, 60, 9, 0.15), transparent);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(42, 41, 46, 0.8);
+            border: 1px solid rgba(251, 185, 124, 0.2);
+            border-radius: 12px;
+            padding: 6px 20px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(6px);
+        }
+
+        .hero-badge::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 12px;
+            margin-right: 10px;
+            box-shadow: 0 0 8px rgba(251, 185, 124, 0.9);
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+
+        .hero-subtitle {
+            font-size: 28px;
+            font-style: italic;
+            color: var(--accent-gold);
+            margin-bottom: 60px;
+        }
+
+        .hero-text {
+            max-width: 720px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero-text p.highlight {
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .hero-text p.accent {
+            color: var(--accent-gold);
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 36px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: 'Syne', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2.08px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-light);
+            color: #715b33;
+            box-shadow: 0 0 16px rgba(243, 213, 163, 0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(243, 213, 163, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            border: 1px solid rgba(251, 185, 124, 0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 112px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .section-header::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: var(--accent-gold);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 64px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: linear-gradient(135deg, rgba(31, 31, 35, 0.8), rgba(27, 27, 31, 0.8));
+            border-radius: 8px;
+            padding: 64px;
+            margin: 60px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-section h2 {
+            text-align: center;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .form-description {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(42, 41, 46, 0.6);
+            border: 1px solid rgba(251, 185, 124, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: rgba(42, 41, 46, 0.9);
+            box-shadow: 0 0 12px rgba(251, 185, 124, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-light);
+            color: #715b33;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(243, 213, 163, 0.3);
+        }
+
+        .form-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-message {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .form-message.success {
+            background: rgba(123, 187, 68, 0.1);
+            color: #7bbb44;
+            border: 1px solid rgba(123, 187, 68, 0.3);
+        }
+
+        .form-message.error {
+            background: rgba(220, 95, 95, 0.1);
+            color: #dc5f5f;
+            border: 1px solid rgba(220, 95, 95, 0.3);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .feature {
+            background: var(--card-bg);
+            padding: 48px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature .icon {
+            font-size: 44px;
+            margin-bottom: 16px;
+        }
+
+        .feature h4 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .feature p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Call to Action */
+        .cta {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            margin-bottom: 24px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(42, 41, 46, 0.3);
+            padding: 60px 0;
+            border-top: 1px solid rgba(251, 185, 124, 0.1);
+            margin-top: 112px;
+        }
+
+        footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        footer h4 {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        footer p, footer a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 40px;
+            }
+
+            header .container {
+                padding: 12px 40px;
+            }
+
+            header nav {
+                gap: 20px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .card, .form-section {
+                padding: 40px;
+            }
+
+            .hero {
+                padding-top: 120px;
+                padding-bottom: 60px;
+            }
+
+            .cards-grid, .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            header .container {
+                padding: 12px 20px;
+            }
+
+            h1 { font-size: 36px; }
+            h2 { font-size: 28px; }
+
+            header nav {
+                display: none;
+            }
+
+            .card, .form-section {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 80px;">
+            <a href="#" class="logo">0 → HERO</a>
+            <nav style="display: flex; gap: 40px;">
+                <a href="#about">About</a>
+                <a href="#form">Connect</a>
+                <a href="#journey">Journey</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">
+                <span style="font-size: 11px; font-weight: 700; letter-spacing: 2.42px; text-transform: uppercase;">STRATEGY • SCRIPTING • MANAGEMENT • INSPIRATION</span>
+            </div>
+            
+            <div style="text-align: center;">
+                <h1 class="hero-title">EVERY HERO HAS SOMEONE BEHIND THE STORY.</h1>
+                <p class="hero-subtitle">For me, that person is Dhanya.</p>
+            </div>
+
+            <div class="hero-text">
+                <p>Some people simply become a part of your journey.</p>
+                <p>And then there are people who make you want to change the direction of that journey.</p>
+                <p class="highlight">Dhanya is one of those people.</p>
+                <p>She helps turn ideas into plans, plans into action, and ordinary moments into something worth building.</p>
+                <p class="accent">From 0 to Hero — one step, one idea, one strategy at a time.</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <a href="#form" class="btn btn-primary">START THE JOURNEY</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background: rgba(42, 41, 46, 0.2);">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="section-header" style="justify-content: center;">
+                    <span class="eyebrow">THE PERSON BEHIND THE GROWTH</span>
+                </div>
+                
+                <h2 style="color: var(--text-primary); margin-bottom: 48px;">
+                    More than a strategist.
+                    <span style="font-style: italic; color: var(--accent-gold);">More than a manager.</span>
+                </h2>
+
+                <p style="color: var(--text-secondary); font-size: 18px; line-height: 1.8; margin-bottom: 40px;">
+                    There is a rare category of person whose presence doesn't merely organize a room—it reconstructs the standard of what's possible within it. This is the essence of authentic leadership, and it's what makes someone truly indispensable.
+                </p>
+
+                <h3 style="color: var(--text-primary); font-size: 28px; margin-bottom: 24px;">
+                    She doesn't just tell you what to do.
+                </h3>
+                <h3 style="color: var(--text-primary); font-size: 28px; margin-bottom: 48px;">
+                    She makes you think differently.
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- What She Does -->
+    <section id="journey">
+        <div class="container">
+            <div class="section-header">
+                <span class="eyebrow">CORE CAPABILITIES</span>
+            </div>
+            <h2 style="margin-bottom: 48px;">WHAT SHE DOES</h2>
+
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="icon">🧠</div>
+                    <h4>STRATEGIZES</h4>
+                    <p>Ideas are easy. Knowing which idea is worth pursuing is the real skill. She brings clarity, direction, and a strategy behind every move.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">✍️</div>
+                    <h4>SCRIPTS</h4>
+                    <p>Every good idea needs a story. She turns thoughts into words, concepts into stories, and stories into something people want to remember.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">🎯</div>
+                    <h4>MANAGES</h4>
+                    <p>A great plan means nothing without execution. She keeps things moving, organized, and focused on the bigger picture.</p>
+                </div>
+                <div class="feature">
+                    <div class="icon">❤️</div>
+                    <h4>INSPIRES</h4>
+                    <p>She makes people around her want to become a little better than they were yesterday. It's something she does naturally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="form" style="background: rgba(105, 60, 9, 0.05); padding: 80px 0;">
+        <div class="container">
+            <div class="form-section">
+                <div class="eyebrow" style="display: block; text-align: center; margin-bottom: 16px;">
+                    LET'S CONNECT
+                </div>
+                <h2 style="text-align: center;">GET IN TOUCH</h2>
+                <p class="form-description">
+                    Share your details and let's start the conversation.
+                </p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            placeholder="Your name"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="your@email.com"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="+1 (555) 000-0000"
+                        />
+                    </div>
+
+                    <button type="submit" class="form-submit">SEND MESSAGE</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Her Section -->
+    <section style="background: rgba(42, 41, 46, 0.2);">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="section-header" style="justify-content: center;">
+                    <span class="eyebrow">INTIMATE REFLECTION</span>
+                </div>
+
+                <h2 style="margin-bottom: 48px;">WHY HER?</h2>
+
+                <p style="font-style: italic; font-size: 24px; color: var(--accent-gold); margin-bottom: 40px;">
+                    "Because sometimes the right person changes the way you see yourself."
+                </p>
+
+                <p style="color: var(--text-secondary); font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                    She doesn't promise that the journey will always be easy.
+                </p>
+
+                <p style="color: var(--text-primary); font-size: 18px; line-height: 1.8; margin-bottom: 20px;">
+                    She simply makes you believe that it's worth taking.
+                </p>
+
+                <p style="color: var(--accent-gold); font-size: 18px; line-height: 1.8;">
+                    And that's something I won't forget.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 style="margin-bottom: 24px;">The Journey Continues</h2>
+            <p>There are more ideas to build. More goals to chase. More levels to reach.</p>
+            <p style="font-style: italic; color: var(--accent-gold); margin-top: 24px; font-size: 24px;">
+                "And maybe... The best part of the story hasn't even happened yet."
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div>
+                <h4>0 → HERO</h4>
+                <p>A journey of growth, strategy, and transformation. Celebrating the people who make it possible.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p><a href="#about">About</a></p>
+                <p><a href="#journey">The Journey</a></p>
+                <p><a href="#form">Get In Touch</a></p>
+            </div>
+            <div>
+                <h4>Connect</h4>
+                <p>Email: hello@example.com</p>
+                <p>Ready to start your journey?</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            // Build the URL with query parameters
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzL0QhTPJzXnvu9HnDFK67PM5iGLvzgT_7_wnffJrZ6Vp3xXDLv4ukKiLxmH7sLTO-e/exec';
+            const url = scriptUrl + '?' + new URLSearchParams({
+                name: name,
+                email: email,
+                phone: phone
+            });
+
+            // Use fetch with GET and no-cors mode
+            fetch(url, {
+                method: 'GET',
+                mode: 'no-cors'
+            })
+            .then(() => {
+                // Success - response is opaque so we can't check it
+                showSuccess();
+                document.getElementById('contactForm').reset();
+            })
+            .catch(() => {
+                // Error
+                showError();
+            });
+        });
+
+        function showSuccess() {
+            const messageDiv = document.getElementById('formMessage');
+            messageDiv.textContent = '✓ Message sent successfully! Thank you for connecting.';
+            messageDiv.className = 'form-message success';
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showError() {
+            const messageDiv = document.getElementById('formMessage');
+            messageDiv.textContent = '✗ There was an issue sending your message. Please try again.';
+            messageDiv.className = 'form-message error';
+            messageDiv.style.display = 'block';
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
